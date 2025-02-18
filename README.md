@@ -108,6 +108,35 @@ Or manual: add the latest version as dependency to your package.json.
     }
   ```
 
+---
+
+## Note (For React-Native 0.77.0 And Above) ✅
+- In MainApplication.kt
+```
+import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage; <---- import it on top 
+
+   override fun getPackages(): List<ReactPackage> =
+            PackageList(this).packages.apply {
+              // Packages that cannot be autolinked yet can be added manually here, for example:
+              // add(MyReactNativePackage())
+               add(RNImmediatePhoneCallPackage()) <------------ Add This Code Here
+            }
+```
+
+- MainActivity.java ( You can place this function after createReactActivityDelegate )
+
+```
+import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage; <----- Import it at top
+
+  override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        RNImmediatePhoneCallPackage.onRequestPermissionsResult(requestCode, permissions, grantResults) // very important event callback
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+```
+
+---
+
 ## Setup in Expo
 
 Install package
